@@ -21,6 +21,10 @@
   <body>
     <main id="main">
       <div id="errors"></div>
+      <form>
+        <input type="text" id="searchTerms">
+        <a href="#" onclick="searchRepositories();return false;" id="submit">Search Repositories</a>
+      </form>
     </main>
     <div class="flexbox-container">
       <div>
@@ -29,7 +33,7 @@
       </div>
       <div>
         <h3>Details</h3>
-        <div id="details"></div>
+          <div id="details"></div>
       </div>
     </div>
     <script src="jquery-3.1.0.min.js"></script>
