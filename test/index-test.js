@@ -19,15 +19,6 @@ describe('index.js', () => {
     window.$ = require('jquery')
   })
 
-  describe('index.html', () => {
-    it('has the right elements', () => {
-      expect(document.getElementsByTagName('a')[0].innerHTML).toMatch(/(S|s)earch/)
-      expect(document.getElementById('searchTerms')).toExist()
-      expect(document.getElementById('results')).toExist()
-      expect(document.getElementById('details')).toExist()
-    })
-  })
-
   describe('displayError', () => {
     it('sets the errors div content', () => {
       displayError()
@@ -50,15 +41,6 @@ describe('index.js', () => {
       xhr.restore()
     })
 
-    describe('searchRepositories', () => {
-      it('calls out to the github search API and displays results', () => {
-        window.$('#searchTerms').val('tetris')
-        searchRepositories()
-        requests[0].respond(200, contentType, resultsData())
-        expect(requests[0].url).toMatch(/https:\/\/api.github.com\/search\/repositories\?q=tetris/)
-        expect(window.$('#results').html()).toMatch(/Tetris/)
-      })
-    })
 
     describe('showCommits', () => {
       it('calls the github commits api and displays results', () => {
