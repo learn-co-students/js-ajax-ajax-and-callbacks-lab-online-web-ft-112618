@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,8 +19,14 @@
       }
     </style>
   </head>
+
   <body>
     <main id="main">
+      <div class="">
+          <input type="text" id="searchTerms" placeholder="Type search terms here...">
+          <a href="#" onclick="searchRepositories();return false;">Search Repositories</a>
+      </div>
+
       <div id="errors"></div>
     </main>
     <div class="flexbox-container">
@@ -32,7 +39,36 @@
         <div id="details"></div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.1/handlebars.min.js"></script>
     <script src="jquery-3.1.0.min.js"></script>
     <script src="index.js"></script>
+    <script id="repository-template" type="text/x-handlebars-template">
+      <ul>
+        {{#each this}}
+        <li>
+          <h2><a href="{{html_url}}">{{name}}</a></h2>
+          <p><a href="#" data-repository="{{name}}" data-owner="{{owner.login}}" onclick="showCommits(this); return false;">Show Commits</a></p>
+          {{> authorPartial owner}}
+          <p>{{description}}</p>
+        </li>
+        {{/each}}
+      </ul>
+    </script>
+    <script id="commits-template" type="text/x-handlebars-template">
+      <ul>
+        {{#each this}}
+          <li>
+            <p>SHA: {{sha}}</p>
+            {{> authorPartial author}}
+          </li>
+        {{/each}}
+      </ul>
+    </script>
+    <script id="author-partial-template" type="text/x-handlebars-template">
+      <section>
+        <header><h4>Created By <a href="{{html_url}}">{{login}}</a></h4></header>
+        <img src="{{avatar_url}}" height="64" width="64">
+      </section>
+    </script>
   </body>
 </html>
